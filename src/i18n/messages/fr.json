@@ -37,6 +37,8 @@
     "title": "Nouvelle conversation",
     "selectRecipient": "Choisir un destinataire",
     "create": "Créer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "creating": "Création en cours...",
+    "createError": "Impossible de créer la conversation"
   }
 }
