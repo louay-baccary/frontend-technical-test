@@ -8,7 +8,7 @@ const nextConfig = {
   },
   // Modern i18n config
   i18n: {
-    locales: ['fr'],
+    locales: ['fr', 'en'],
     defaultLocale: 'fr',
   }
 }

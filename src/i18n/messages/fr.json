@@ -1,0 +1,27 @@
+{
+  "conversationList": {
+    "empty": "Aucune conversation pour le moment",
+    "errorTitle": "Impossible de charger les conversations",
+    "retry": "Réessayer",
+    "noMessagesPreview": "Aucun message pour l'instant"
+  },
+  "messageThread": {
+    "empty": "Aucun message. Écrivez le premier !",
+    "errorTitle": "Impossible de charger les messages"
+  },
+  "composer": {
+    "placeholder": "Écrivez un message...",
+    "send": "Envoyer",
+    "emptyError": "Le message ne peut pas être vide",
+    "tooLongError": "Message trop long (2000 caractères maximum)",
+    "sending": "Envoi en cours...",
+    "failed": "Échec de l'envoi",
+    "retry": "Réessayer"
+  },
+  "newConversation": {
+    "title": "Nouvelle conversation",
+    "selectRecipient": "Choisir un destinataire",
+    "create": "Créer",
+    "cancel": "Annuler"
+  }
+}
