@@ -22,6 +22,34 @@ export function ConversationList(): ReactElement {
     })
   }
 
+  // Same reasoning as MessageThread: a query that has ever succeeded keeps
+  // its last-known-good data even after a later background refetch fails
+  // (isError and cached data can both be true at once). Prefer showing
+  // cached conversations over a blocking error screen; only fall back to
+  // loading/error when there is nothing cached to show at all.
+  if (conversations && conversations.length > 0) {
+    return (
+      <ul className={styles.list}>
+        {conversations.map((conversation) => {
+          const otherNickname =
+            conversation.senderId === currentUserId
+              ? conversation.recipientNickname
+              : conversation.senderNickname
+
+          return (
+            <ConversationListItem
+              key={conversation.id}
+              conversation={conversation}
+              otherNickname={otherNickname}
+              isSelected={selectedConversationId === String(conversation.id)}
+              onSelect={() => handleSelect(conversation.id)}
+            />
+          )
+        })}
+      </ul>
+    )
+  }
+
   if (isLoading) {
     return (
       <ul className={styles.list} aria-busy="true">
@@ -43,28 +71,5 @@ export function ConversationList(): ReactElement {
     )
   }
 
-  if (!conversations || conversations.length === 0) {
-    return <p className={styles.emptyState}>{t('conversationList.empty')}</p>
-  }
-
-  return (
-    <ul className={styles.list}>
-      {conversations.map((conversation) => {
-        const otherNickname =
-          conversation.senderId === currentUserId
-            ? conversation.recipientNickname
-            : conversation.senderNickname
-
-        return (
-          <ConversationListItem
-            key={conversation.id}
-            conversation={conversation}
-            otherNickname={otherNickname}
-            isSelected={selectedConversationId === String(conversation.id)}
-            onSelect={() => handleSelect(conversation.id)}
-          />
-        )
-      })}
-    </ul>
-  )
+  return <p className={styles.emptyState}>{t('conversationList.empty')}</p>
 }
