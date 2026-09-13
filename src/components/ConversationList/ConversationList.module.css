@@ -1,0 +1,84 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.item[aria-current='true'] {
+  background: var(--color-bubble-own);
+}
+
+.itemButton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: none;
+  border: none;
+  text-align: left;
+  font: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.itemButton:focus-visible {
+  outline: 2px solid var(--color-border-functional);
+  outline-offset: -2px;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.nickname {
+  font-weight: 600;
+}
+
+.timestamp {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.preview {
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.skeletonItem {
+  height: 56px;
+  margin: var(--space-2) var(--space-4);
+  background: var(--color-border-subtle);
+  border-radius: 4px;
+}
+
+.errorState {
+  padding: var(--space-4);
+  color: var(--color-error);
+}
+
+.retryButton {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--color-border-functional);
+  border-radius: 4px;
+  color: var(--color-accent-strong);
+  font: inherit;
+  cursor: pointer;
+}
+
+.emptyState {
+  padding: var(--space-4);
+  color: var(--color-text-secondary);
+}
