@@ -38,7 +38,7 @@ function renderThread() {
 
 describe('MessageThread', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    jest.resetAllMocks()
     mockedApi.getUsers.mockResolvedValue({ ok: true, data: users })
   })
 
