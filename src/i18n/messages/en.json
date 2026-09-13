@@ -1,4 +1,17 @@
 {
+  "appShell": {
+    "title": "leboncoin Messages",
+    "conversationsNav": "Conversation list",
+    "back": "Back to conversation list",
+    "selectConversation": "Select a conversation",
+    "viewingAs": "Viewing as",
+    "languageNav": "Language selection",
+    "switchToFrench": "Switch to French",
+    "switchToEnglish": "Switch to English"
+  },
+  "common": {
+    "comingSoon": "Coming soon"
+  },
   "conversationList": {
     "empty": "No conversations yet",
     "errorTitle": "Couldn't load conversations",

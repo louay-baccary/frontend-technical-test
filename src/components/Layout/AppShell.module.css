@@ -1,0 +1,135 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.title {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.listPane {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.threadPane {
+  flex: 1;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Mobile-first: only one pane visible at a time, driven by whether a
+   conversation is selected (router.query.conversationId). */
+.body[data-has-selection='true'] .listPane {
+  display: none;
+}
+
+.body[data-has-selection='true'] .threadPane {
+  display: flex;
+}
+
+.body[data-has-selection='false'] .threadPane {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .listPane {
+    display: block !important;
+    flex: 0 0 320px;
+    border-right: 1px solid var(--color-border-subtle);
+  }
+
+  .threadPane {
+    display: flex !important;
+  }
+
+  .backButton {
+    display: none;
+  }
+}
+
+.backButton {
+  align-self: flex-start;
+  margin: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--color-border-functional);
+  border-radius: 4px;
+  color: var(--color-accent-strong);
+  font: inherit;
+  cursor: pointer;
+}
+
+.noSelection {
+  padding: var(--space-4);
+  color: var(--color-text-secondary);
+}
+
+.userSwitcher {
+  display: inline-flex;
+}
+
+.userSelect {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border-functional);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.languageSwitcher {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.languageSwitcher a {
+  padding: var(--space-1) var(--space-2);
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+}
+
+.languageSwitcher a[aria-current='true'] {
+  color: var(--color-accent-strong);
+  font-weight: 600;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
