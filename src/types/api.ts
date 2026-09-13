@@ -1,8 +1,3 @@
-// Shapes for request bodies / error responses not already covered by
-// Conversation, Message, User (which we leave untouched).
-// Note: these bodies include fields NOT documented in the swagger, but
-// verified as necessary against the live server (see IMPLEMENTATION_PLAN.md
-// Section 0, items 5-6).
 
 export interface CreateConversationBody {
   recipientId: number
