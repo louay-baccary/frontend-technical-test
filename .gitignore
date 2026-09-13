@@ -9,6 +9,12 @@ yarn.lock
 # testing
 /coverage
 
+# playwright (optional/stretch e2e smoke test, see README)
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
 # next.js
 /.next/
 /out/
