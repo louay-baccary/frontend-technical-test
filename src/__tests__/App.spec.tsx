@@ -96,4 +96,41 @@ describe('App', () => {
     const inputAfterSwitch = await screen.findByPlaceholderText('Écrivez un message...')
     expect(inputAfterSwitch).toHaveValue('')
   })
+
+  it('moves focus to the back button on selecting a conversation, and to the list landmark on going back (a11y sweep)', async () => {
+    // On mobile widths, selecting/deselecting a conversation hides the pane
+    // the focused element lives in via CSS display:none, which browsers
+    // resolve by dropping focus to <body> - breaking the tab order across
+    // the AppShell/ConversationList/MessageThread boundary. This asserts
+    // AppShell explicitly redirects focus instead of leaving it to chance.
+    const { rerender } = renderApp()
+
+    mockRouter.query = { conversationId: '1' }
+    rerender(
+      <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
+        <CurrentUserProvider>
+          <ToastProvider>
+            <Home />
+          </ToastProvider>
+        </CurrentUserProvider>
+      </QueryClientProvider>
+    )
+
+    const backButton = await screen.findByRole('button', { name: 'Retour à la liste des conversations' })
+    expect(document.activeElement).toBe(backButton)
+
+    mockRouter.query = {}
+    rerender(
+      <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
+        <CurrentUserProvider>
+          <ToastProvider>
+            <Home />
+          </ToastProvider>
+        </CurrentUserProvider>
+      </QueryClientProvider>
+    )
+
+    const listNav = screen.getByRole('navigation', { name: 'Liste des conversations' })
+    expect(document.activeElement).toBe(listNav)
+  })
 })
