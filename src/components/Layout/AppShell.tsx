@@ -64,7 +64,7 @@ export function AppShell({ conversationList, messageThread }: AppShellProps): Re
         </div>
       </header>
 
-      <div className={styles.body} data-has-selection={selectedConversationId ? 'true' : 'false'}>
+      <main className={styles.body} data-has-selection={selectedConversationId ? 'true' : 'false'}>
         <nav
           ref={listPaneRef}
           className={styles.listPane}
@@ -74,7 +74,7 @@ export function AppShell({ conversationList, messageThread }: AppShellProps): Re
           {conversationList}
         </nav>
 
-        <main className={styles.threadPane}>
+        <div className={styles.threadPane}>
           {selectedConversationId ? (
             <>
               <button
@@ -91,8 +91,8 @@ export function AppShell({ conversationList, messageThread }: AppShellProps): Re
           ) : (
             <p className={styles.noSelection}>{t('appShell.selectConversation')}</p>
           )}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }
