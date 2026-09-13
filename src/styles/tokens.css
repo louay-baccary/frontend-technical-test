@@ -1,0 +1,35 @@
+:root {
+  /* Accent (leboncoin brand orange), split by contrast requirement */
+  --color-accent: #E05A00;        /* 3.73:1 on white — decorative/large-text/icons only */
+  --color-accent-strong: #C24700; /* 5.0:1 on white — buttons/links/small text */
+
+  /* Neutrals */
+  --color-bg: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-text: #1A1A1A;           /* 16.7:1 on --color-bg */
+  --color-text-secondary: #6B6B6B; /* 5.1:1 on --color-bg */
+
+  /* Borders, split by role */
+  --color-border-subtle: #E5E5E5;     /* decorative dividers only, ~1.2:1 */
+  --color-border-functional: #8C8C8C; /* input outlines/focus rings, 3.2:1 on --color-bg */
+
+  /* Message bubbles */
+  --color-bubble-own: #FFF1E6;
+  --color-bubble-other: #F2F2F3;
+
+  /* Semantic, split by role like the accent */
+  --color-error: #C0392B;         /* 5.4:1 on white — validation/error copy */
+  --color-success-icon: #2E9E5B;  /* 3.4:1 on white — icon/checkmark only, not text */
+  --color-success-text: #1E7B45;  /* 5.3:1 on white — used wherever success renders as text */
+
+  /* Typography */
+  --font-family-base: -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacing scale, 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}
