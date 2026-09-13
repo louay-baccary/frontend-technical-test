@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import Head from 'next/head'
 import { AppShell } from '../components/Layout/AppShell'
+import { ConversationList } from '../components/ConversationList/ConversationList'
 import { useTranslations } from '../i18n/useTranslations'
 
 export default function Home(): ReactElement {
@@ -14,7 +15,7 @@ export default function Home(): ReactElement {
       </Head>
 
       <AppShell
-        conversationList={<p>{t('common.comingSoon')}</p>}
+        conversationList={<ConversationList />}
         messageThread={<p>{t('common.comingSoon')}</p>}
       />
     </>
