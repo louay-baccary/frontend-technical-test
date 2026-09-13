@@ -2,6 +2,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ConversationList } from '../ConversationList/ConversationList'
 import { CurrentUserProvider } from '../../context/CurrentUserContext'
+import { ToastProvider } from '../Feedback/ToastProvider'
 import { api } from '../../lib/api'
 import type { Conversation } from '../../types/conversation'
 import type { Message } from '../../types/message'
@@ -65,7 +66,9 @@ function renderList() {
   return render(
     <QueryClientProvider client={queryClient}>
       <CurrentUserProvider>
-        <ConversationList />
+        <ToastProvider>
+          <ConversationList />
+        </ToastProvider>
       </CurrentUserProvider>
     </QueryClientProvider>
   )

@@ -1,4 +1,7 @@
 {
+  "common": {
+    "dismiss": "Dismiss"
+  },
   "appShell": {
     "title": "leboncoin Messages",
     "conversationsNav": "Conversation list",

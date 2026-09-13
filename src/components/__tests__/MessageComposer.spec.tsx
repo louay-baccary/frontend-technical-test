@@ -2,6 +2,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MessageComposer } from '../MessageComposer/MessageComposer'
 import { CurrentUserProvider } from '../../context/CurrentUserContext'
+import { ToastProvider } from '../Feedback/ToastProvider'
 import { api } from '../../lib/api'
 
 jest.mock('../../lib/api')
@@ -23,7 +24,9 @@ function renderComposer() {
   return render(
     <QueryClientProvider client={queryClient}>
       <CurrentUserProvider>
-        <MessageComposer />
+        <ToastProvider>
+          <MessageComposer />
+        </ToastProvider>
       </CurrentUserProvider>
     </QueryClientProvider>
   )
@@ -79,7 +82,12 @@ describe('MessageComposer', () => {
     fireEvent.change(getInput(), { target: { value: 'Hello' } })
     fireEvent.submit(getInput().closest('form')!)
 
-    expect(await screen.findByText(/Service temporarily unavailable/)).toBeInTheDocument()
+    // A toast (role="status") now also fires with the same text, so scope
+    // this to the persistent failed banner specifically (identity-obj-proxy
+    // maps CSS module classes to their literal name under Jest).
+    expect(
+      await screen.findByText(/Service temporarily unavailable/, { selector: '.failedText' })
+    ).toBeInTheDocument()
   })
 
   it('shows a failed banner for a generic network failure too, with its own message', async () => {
@@ -94,7 +102,9 @@ describe('MessageComposer', () => {
     fireEvent.change(getInput(), { target: { value: 'Hello' } })
     fireEvent.submit(getInput().closest('form')!)
 
-    expect(await screen.findByText(/Network error, please check your connection/)).toBeInTheDocument()
+    expect(
+      await screen.findByText(/Network error, please check your connection/, { selector: '.failedText' })
+    ).toBeInTheDocument()
   })
 
   it('disables the retry control while its own retry is in flight, and a fast double-click sends only once', async () => {

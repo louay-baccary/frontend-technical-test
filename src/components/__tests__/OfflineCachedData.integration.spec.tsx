@@ -4,6 +4,7 @@ import { MessageThread } from '../MessageThread/MessageThread'
 import { MessageComposer } from '../MessageComposer/MessageComposer'
 import { ConversationList } from '../ConversationList/ConversationList'
 import { CurrentUserProvider } from '../../context/CurrentUserContext'
+import { ToastProvider } from '../Feedback/ToastProvider'
 
 // Deliberately NOT mocking ../../lib/api - these tests exercise the real
 // api.ts and a real QueryClient (configured like production's
@@ -78,8 +79,10 @@ describe('reading from cache while offline mid-session', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <CurrentUserProvider>
-          <MessageThread />
-          <MessageComposer />
+          <ToastProvider>
+            <MessageThread />
+            <MessageComposer />
+          </ToastProvider>
         </CurrentUserProvider>
       </QueryClientProvider>
     )
@@ -103,10 +106,13 @@ describe('reading from cache while offline mid-session', () => {
 
     // The already-loaded message must still be visible...
     expect(screen.getByText('hello cached')).toBeInTheDocument()
-    // ...and the thread itself must not be showing its blocking error state
-    // (the composer's own failed-send banner, a separate role="alert", is
-    // expected and fine here).
-    expect(screen.queryByText('Impossible de charger les messages')).not.toBeInTheDocument()
+    // ...the thread itself must not be showing its blocking error+retry
+    // screen (role="alert") - only a non-blocking toast (role="status") is
+    // expected for this otherwise-silent background failure, alongside the
+    // composer's own separate failed-send banner (also role="alert", but a
+    // different failure - the send itself, not the background refetch).
+    expect(screen.queryByText('Impossible de charger les messages', { selector: '[role="alert"] *' })).not.toBeInTheDocument()
+    expect(await screen.findByText('Impossible de charger les messages', { selector: '[role="status"] *' })).toBeInTheDocument()
   })
 
   it('keeps showing already-loaded conversations after a later invalidate fails while offline, instead of an error screen', async () => {
@@ -131,7 +137,9 @@ describe('reading from cache while offline mid-session', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <CurrentUserProvider>
-          <ConversationList />
+          <ToastProvider>
+            <ConversationList />
+          </ToastProvider>
         </CurrentUserProvider>
       </QueryClientProvider>
     )
@@ -147,6 +155,11 @@ describe('reading from cache while offline mid-session', () => {
     })
 
     expect(screen.getByText('Jeremie')).toBeInTheDocument()
-    expect(screen.queryByText('Impossible de charger les conversations')).not.toBeInTheDocument()
+    expect(
+      screen.queryByText('Impossible de charger les conversations', { selector: '[role="alert"] *' })
+    ).not.toBeInTheDocument()
+    expect(
+      await screen.findByText('Impossible de charger les conversations', { selector: '[role="status"] *' })
+    ).toBeInTheDocument()
   })
 })

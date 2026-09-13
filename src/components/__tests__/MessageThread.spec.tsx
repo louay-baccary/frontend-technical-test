@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MessageThread } from '../MessageThread/MessageThread'
 import { CurrentUserProvider } from '../../context/CurrentUserContext'
+import { ToastProvider } from '../Feedback/ToastProvider'
 import { api } from '../../lib/api'
 import type { Message } from '../../types/message'
 import type { User } from '../../types/user'
@@ -30,7 +31,9 @@ function renderThread() {
   return render(
     <QueryClientProvider client={queryClient}>
       <CurrentUserProvider>
-        <MessageThread />
+        <ToastProvider>
+          <MessageThread />
+        </ToastProvider>
       </CurrentUserProvider>
     </QueryClientProvider>
   )
