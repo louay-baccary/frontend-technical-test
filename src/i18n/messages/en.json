@@ -1,0 +1,27 @@
+{
+  "conversationList": {
+    "empty": "No conversations yet",
+    "errorTitle": "Couldn't load conversations",
+    "retry": "Retry",
+    "noMessagesPreview": "No messages yet"
+  },
+  "messageThread": {
+    "empty": "No messages yet. Write the first one!",
+    "errorTitle": "Couldn't load messages"
+  },
+  "composer": {
+    "placeholder": "Write a message...",
+    "send": "Send",
+    "emptyError": "Message cannot be empty",
+    "tooLongError": "Message is too long (2000 characters max)",
+    "sending": "Sending...",
+    "failed": "Failed to send",
+    "retry": "Retry"
+  },
+  "newConversation": {
+    "title": "New conversation",
+    "selectRecipient": "Choose a recipient",
+    "create": "Create",
+    "cancel": "Cancel"
+  }
+}
