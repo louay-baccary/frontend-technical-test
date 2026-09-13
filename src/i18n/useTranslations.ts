@@ -4,7 +4,7 @@ import en from './messages/en.json'
 
 const messages = { fr, en } as const
 type Locale = keyof typeof messages
-const unused = 1;
+
 function getNested(obj: unknown, path: string): string | undefined {
   return path.split('.').reduce<unknown>((acc, key) => {
     if (acc && typeof acc === 'object' && key in acc) {
