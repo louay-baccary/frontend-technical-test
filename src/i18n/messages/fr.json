@@ -10,7 +10,9 @@
     "viewingAs": "Afficher en tant que",
     "languageNav": "Choix de la langue",
     "switchToFrench": "Passer en français",
-    "switchToEnglish": "Passer en anglais"
+    "switchToEnglish": "Passer en anglais",
+    "switchToDark": "Passer en mode sombre",
+    "switchToLight": "Passer en mode clair"
   },
   "conversationList": {
     "empty": "Aucune conversation pour le moment",

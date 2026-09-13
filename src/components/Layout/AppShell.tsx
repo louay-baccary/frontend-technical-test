@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useTranslations } from '../../i18n/useTranslations'
 import { UserSwitcher } from './UserSwitcher'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { ThemeToggle } from './ThemeToggle'
 import styles from './AppShell.module.css'
 
 interface AppShellProps {
@@ -59,6 +60,7 @@ export function AppShell({ conversationList, messageThread }: AppShellProps): Re
         <div className={styles.headerControls}>
           <UserSwitcher />
           <LanguageSwitcher />
+          <ThemeToggle />
         </div>
       </header>
 

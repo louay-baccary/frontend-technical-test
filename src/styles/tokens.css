@@ -33,3 +33,50 @@
   --space-5: 24px;
   --space-6: 32px;
 }
+
+/* Dark tokens, independently contrast-checked against this palette's own
+   --color-bg/--color-surface, not carried over from the light-mode ratios.
+   Applied two ways: automatically when the OS prefers dark (unless the user
+   has explicitly chosen light in-app), or forced by an explicit in-app
+   choice via [data-theme] on <html>, regardless of the OS setting. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-accent: #C24700;        /* 3.74:1 on --color-bg — decorative/large-text/icons only */
+    --color-accent-strong: #FF9142; /* 8.37:1 on --color-bg, 7.45:1 on --color-surface — text-safe */
+
+    --color-bg: #121212;
+    --color-surface: #1E1E1E;
+    --color-text: #EAEAEA;           /* 15.57:1 on --color-bg, 13.86:1 on --color-surface */
+    --color-text-secondary: #A6A6A6; /* 7.70:1 on --color-bg, 6.85:1 on --color-surface */
+
+    --color-border-subtle: #2A2A2A;     /* decorative dividers only, ~1.31:1 */
+    --color-border-functional: #8F8F8F; /* 5.79:1 on --color-bg, 5.15:1 on --color-surface */
+
+    --color-bubble-own: #3A2A1E;   /* --color-text on this: 11.41:1 */
+    --color-bubble-other: #242424; /* --color-text on this: 12.90:1 */
+
+    --color-error: #FF8A80;         /* 8.21:1 on --color-bg, 7.30:1 on --color-surface */
+    --color-success-icon: #4CD787;  /* 10.15:1 on --color-bg — icon/checkmark only, not text */
+    --color-success-text: #7BE8A4;  /* 12.42:1 on --color-bg, 11.05:1 on --color-surface */
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-accent: #C24700;
+  --color-accent-strong: #FF9142;
+
+  --color-bg: #121212;
+  --color-surface: #1E1E1E;
+  --color-text: #EAEAEA;
+  --color-text-secondary: #A6A6A6;
+
+  --color-border-subtle: #2A2A2A;
+  --color-border-functional: #8F8F8F;
+
+  --color-bubble-own: #3A2A1E;
+  --color-bubble-other: #242424;
+
+  --color-error: #FF8A80;
+  --color-success-icon: #4CD787;
+  --color-success-text: #7BE8A4;
+}

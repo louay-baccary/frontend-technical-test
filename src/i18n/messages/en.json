@@ -10,7 +10,9 @@
     "viewingAs": "Viewing as",
     "languageNav": "Language selection",
     "switchToFrench": "Switch to French",
-    "switchToEnglish": "Switch to English"
+    "switchToEnglish": "Switch to English",
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
   },
   "conversationList": {
     "empty": "No conversations yet",
