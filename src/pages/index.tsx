@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { AppShell } from '../components/Layout/AppShell'
 import { ConversationList } from '../components/ConversationList/ConversationList'
 import { MessageThread } from '../components/MessageThread/MessageThread'
+import { MessageComposer } from '../components/MessageComposer/MessageComposer'
 import { useTranslations } from '../i18n/useTranslations'
 
 export default function Home(): ReactElement {
@@ -17,7 +18,12 @@ export default function Home(): ReactElement {
 
       <AppShell
         conversationList={<ConversationList />}
-        messageThread={<MessageThread />}
+        messageThread={
+          <>
+            <MessageThread />
+            <MessageComposer />
+          </>
+        }
       />
     </>
   )
