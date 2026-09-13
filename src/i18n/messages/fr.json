@@ -1,4 +1,7 @@
 {
+  "common": {
+    "dismiss": "Fermer"
+  },
   "appShell": {
     "title": "Messages leboncoin",
     "conversationsNav": "Liste des conversations",

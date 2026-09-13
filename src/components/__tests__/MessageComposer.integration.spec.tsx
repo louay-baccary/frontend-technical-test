@@ -2,6 +2,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react'
 import { QueryClient, QueryClientProvider, onlineManager } from '@tanstack/react-query'
 import { MessageComposer } from '../MessageComposer/MessageComposer'
 import { CurrentUserProvider } from '../../context/CurrentUserContext'
+import { ToastProvider } from '../Feedback/ToastProvider'
 
 // Deliberately NOT mocking ../../lib/api here - this test exercises the real
 // api.ts (real fetch wrapper, real AbortController timeout), unlike
@@ -32,7 +33,9 @@ function renderComposer() {
   return render(
     <QueryClientProvider client={queryClient}>
       <CurrentUserProvider>
-        <MessageComposer />
+        <ToastProvider>
+          <MessageComposer />
+        </ToastProvider>
       </CurrentUserProvider>
     </QueryClientProvider>
   )

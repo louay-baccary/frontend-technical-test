@@ -1,10 +1,14 @@
-import { useState, type ReactElement, type ReactNode } from 'react'
+import { useEffect, useState, type ReactElement, type ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { useConversations } from '../../hooks/useConversations'
 import { useCurrentUser } from '../../context/CurrentUserContext'
 import { useTranslations } from '../../i18n/useTranslations'
+import { useToast } from '../Feedback/ToastProvider'
 import { ConversationListItem } from './ConversationListItem'
+import { EmptyState } from '../Feedback/EmptyState'
+import { ErrorState } from '../Feedback/ErrorState'
+import { LoadingSkeleton } from '../Feedback/LoadingSkeleton'
 import styles from './ConversationList.module.css'
 
 // Not imported eagerly: most page loads never open this modal, so its code
@@ -16,6 +20,7 @@ const NewConversationModal = dynamic(() => import('../NewConversationModal/NewCo
 export function ConversationList(): ReactElement {
   const router = useRouter()
   const t = useTranslations()
+  const { showToast } = useToast()
   const { currentUserId } = useCurrentUser()
   const { data: conversations, isLoading, isError, refetch } = useConversations()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -30,14 +35,24 @@ export function ConversationList(): ReactElement {
     })
   }
 
-  let body: ReactNode
+  const hasCachedConversations = Boolean(conversations && conversations.length > 0)
 
   // Same reasoning as MessageThread: a query that has ever succeeded keeps
   // its last-known-good data even after a later background refetch fails
-  // (isError and cached data can both be true at once). Prefer showing
-  // cached conversations over a blocking error screen; only fall back to
-  // loading/error when there is nothing cached to show at all.
-  if (conversations && conversations.length > 0) {
+  // (isError and cached data can both be true at once). We prefer cached
+  // conversations over a blocking error screen (see below), which would
+  // otherwise leave this failure completely silent - a toast is the right
+  // fit only because there is no other visible error state to redirect to.
+  useEffect(() => {
+    if (isError && hasCachedConversations) {
+      showToast(t('conversationList.errorTitle'))
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError])
+
+  let body: ReactNode
+
+  if (hasCachedConversations && conversations) {
     body = (
       <ul className={styles.list}>
         {conversations.map((conversation) => {
@@ -60,23 +75,25 @@ export function ConversationList(): ReactElement {
     )
   } else if (isLoading) {
     body = (
-      <ul className={styles.list} aria-busy="true">
-        {[0, 1, 2].map((key) => (
-          <li key={key} className={styles.skeletonItem} aria-hidden="true" />
-        ))}
-      </ul>
+      <LoadingSkeleton
+        containerTag="ul"
+        itemTag="li"
+        containerClassName={styles.list}
+        itemClassName={styles.skeletonItem}
+      />
     )
   } else if (isError) {
     body = (
-      <div className={styles.errorState} role="alert">
-        <p>{t('conversationList.errorTitle')}</p>
-        <button type="button" className={styles.retryButton} onClick={() => refetch()}>
-          {t('conversationList.retry')}
-        </button>
-      </div>
+      <ErrorState
+        message={t('conversationList.errorTitle')}
+        retryLabel={t('conversationList.retry')}
+        onRetry={() => refetch()}
+        className={styles.errorState}
+        retryClassName={styles.retryButton}
+      />
     )
   } else {
-    body = <p className={styles.emptyState}>{t('conversationList.empty')}</p>
+    body = <EmptyState message={t('conversationList.empty')} className={styles.emptyState} />
   }
 
   return (

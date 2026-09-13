@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Home from '../pages'
 import { CurrentUserProvider } from '../context/CurrentUserContext'
+import { ToastProvider } from '../components/Feedback/ToastProvider'
 import { api } from '../lib/api'
 
 jest.mock('../lib/api')
@@ -25,7 +26,9 @@ function renderApp() {
   return render(
     <QueryClientProvider client={queryClient}>
       <CurrentUserProvider>
-        <Home />
+        <ToastProvider>
+          <Home />
+        </ToastProvider>
       </CurrentUserProvider>
     </QueryClientProvider>
   )
@@ -83,7 +86,9 @@ describe('App', () => {
     rerender(
       <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
         <CurrentUserProvider>
-          <Home />
+          <ToastProvider>
+            <Home />
+          </ToastProvider>
         </CurrentUserProvider>
       </QueryClientProvider>
     )
