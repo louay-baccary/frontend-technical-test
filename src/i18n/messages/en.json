@@ -9,9 +9,6 @@
     "switchToFrench": "Switch to French",
     "switchToEnglish": "Switch to English"
   },
-  "common": {
-    "comingSoon": "Coming soon"
-  },
   "conversationList": {
     "empty": "No conversations yet",
     "errorTitle": "Couldn't load conversations",
@@ -20,7 +17,12 @@
   },
   "messageThread": {
     "empty": "No messages yet. Write the first one!",
-    "errorTitle": "Couldn't load messages"
+    "errorTitle": "Couldn't load messages",
+    "retry": "Retry",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "messageFromYou": "Message from you",
+    "messageFromOther": "Message from {name}"
   },
   "composer": {
     "placeholder": "Write a message...",

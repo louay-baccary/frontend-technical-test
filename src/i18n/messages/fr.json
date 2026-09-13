@@ -9,9 +9,6 @@
     "switchToFrench": "Passer en français",
     "switchToEnglish": "Passer en anglais"
   },
-  "common": {
-    "comingSoon": "Bientôt disponible"
-  },
   "conversationList": {
     "empty": "Aucune conversation pour le moment",
     "errorTitle": "Impossible de charger les conversations",
@@ -20,7 +17,12 @@
   },
   "messageThread": {
     "empty": "Aucun message. Écrivez le premier !",
-    "errorTitle": "Impossible de charger les messages"
+    "errorTitle": "Impossible de charger les messages",
+    "retry": "Réessayer",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "messageFromYou": "Message de vous",
+    "messageFromOther": "Message de {name}"
   },
   "composer": {
     "placeholder": "Écrivez un message...",
